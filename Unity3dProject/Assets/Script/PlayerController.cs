@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 	public Camera cam;
 
-	public GameObject playerAnim;
+	public HeroAnim playerAnim;
 	// Use this for initialization
 	void Start () {
 		
@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour {
 	    	if (lerpValue<1){
 	    		lerpValue+=Time.deltaTime;	
 	    	}
-	    	playerAnim.animation.Stop();
+	    	playerAnim.gameObject.animation.Stop();
+	    	playerAnim.enabled=false;
 	    }
 	    else{
 	    	if (lerpValue>0){
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour {
 	    	else{
 	    		lerpValue=0;
 	    	}
+	    	playerAnim.enabled=true;
 	    }
 
 	    cam.fieldOfView=Mathf.Lerp(startFOV,endFOV,lerpValue);
