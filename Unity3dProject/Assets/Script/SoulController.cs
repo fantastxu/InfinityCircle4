@@ -14,14 +14,11 @@ public class SoulController : MonoBehaviour
 {
 
 	// Use this for initialization
-	public float safeDistance = 6.0f;
 	public SoulState soulState = SoulState.None;
 	public float maxEnergy = 200.0f;
 	public float currentEnergy = 200.0f;
-	public float consume = 20.0f;//reduce 20.0f energy per second.
+	public float consume = 10.0f;//reduce 20.0f energy per second.
 	public Transform personTrans = null;
-
-	Vector3 lastVector = Vector3.zero;
 
 	void Start () 
 	{
@@ -30,28 +27,10 @@ public class SoulController : MonoBehaviour
 
 	void Update() 
 	{
-		if(personTrans == null)
-			return;
-
-		//check if the soul is on the person
-		{
-			float distance = Vector3.Distance(gameObject.transform.position, personTrans.position);
-			if(distance > safeDistance)
-			{
-				//free mode
-				soulState = SoulState.Free;
-			}
-			else
-			{
-				soulState = SoulState.OnHuman;
-			}
-		}
-
 
 		switch(soulState)
 		{
 		case SoulState.OnHuman:
-			transform.position = lastVector + personTrans.position;
 			currentEnergy = maxEnergy;
 			break;
 		case SoulState.Free:
@@ -61,6 +40,5 @@ public class SoulController : MonoBehaviour
 			break;
 		}
 
-		lastVector = transform.position - personTrans.position;
 	}
 }

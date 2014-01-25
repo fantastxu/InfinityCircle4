@@ -303,7 +303,8 @@ public class OVRPlayerController : OVRComponent
 					     OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftTrigger);
 
 		// Move
-		if(DirXform != null && soulController.soulState == SoulState.Free)
+		if(DirXform != null && soulController != null && 
+		   soulController.soulState == SoulState.Free)
 		{
 			float leftAxisY = 
 				OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftYAxis);
