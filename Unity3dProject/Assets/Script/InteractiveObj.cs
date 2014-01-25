@@ -28,7 +28,7 @@ public class InteractiveObj : MonoBehaviour {
 	
 	}
 
-	virtual public void Action(){
+	virtual public void Action(GameObject _actionBody){
 
 	}
 }

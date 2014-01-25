@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 	public Camera cam;
 
+	public GameObject playerAnim;
 	// Use this for initialization
 	void Start () {
 		
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 
 	    if (target!=null){
 	    	if (Input.GetMouseButtonDown(0) ){
-	    		target.Action();
+	    		target.Action(this.gameObject);
 	    	}	
 	    }
 
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 	    	if (lerpValue<1){
 	    		lerpValue+=Time.deltaTime;	
 	    	}
-	    	
+	    	playerAnim.animation.Stop();
 	    }
 	    else{
 	    	if (lerpValue>0){
