@@ -18,16 +18,35 @@ public class PasswordInput : MonoBehaviour {
 	public bool isRandom;
 	public int maximum=3;
 
-	// Use this for initialization
-	void Start () {
-		if (isRandom){
-			int pwd=(int)(Random.value*Mathf.Pow(10,maximum) );
 
-			correctword=pwd.ToString();
-			while (correctword.Length<maximum){
-				correctword="0"+correctword;
-			}
+	public TextMesh textPwd;
+
+	// Use this for initialization
+	void Awake(){
+		if (isRandom){
+			GeneratePassword();
 		}
+	}
+
+	void GeneratePassword(){
+		int pwd=(int)(Random.value*Mathf.Pow(10,maximum) );
+
+		correctword=pwd.ToString();
+		while (correctword.Length<maximum){
+			correctword="0"+correctword;
+
+
+			
+		}
+
+		if (textPwd!=null){
+			textPwd.text=correctword;
+		}
+		
+	}
+
+	void Start () {
+
 	}
 	
 	// Update is called once per frame
