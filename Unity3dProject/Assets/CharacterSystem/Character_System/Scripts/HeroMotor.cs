@@ -123,6 +123,7 @@ public class HeroMotor : MonoBehaviour
 	void DoubleTap ()
 	{
 		// Double Tap WASD
+		/*
 		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.S)
 			|| Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.D))
 		{
@@ -157,6 +158,7 @@ public class HeroMotor : MonoBehaviour
 			}
 			lastTapTime = Time.time;
 		}
+		*/
 	}
 	//=================================================================================================================o
 	void Update ()
