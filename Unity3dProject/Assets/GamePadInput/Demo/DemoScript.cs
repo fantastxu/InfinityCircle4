@@ -41,9 +41,10 @@ public class DemoScript : MonoBehaviour
 
     }
 
-
     void DrawState(GamePad.Index controller)
     {
+        
+        
         GUILayout.Space(45);
 
         GUILayout.BeginVertical();
@@ -81,10 +82,24 @@ public class DemoScript : MonoBehaviour
         GUILayout.Label("" + state.rightStickAxis);
         GUILayout.Label("" + state.dPadAxis);
         
+        
 
         //GUILayout.EndArea();
         GUILayout.EndVertical();
 
+    }
+    
+    void Update()
+    {
+        if (GamePad.GetButtonUp(GamePad.Button.A, GamePad.Index.One))
+        {
+            Debug.Log("A Up");
+        }
+        
+        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
+        {
+            Debug.Log("A Down");
+        }
     }
 
     void DrawLabels()
