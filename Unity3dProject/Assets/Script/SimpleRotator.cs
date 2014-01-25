@@ -5,6 +5,8 @@ using Holoville.HOTween;
 public class SimpleRotator : InteractiveObj {
 
     public float rotateDegree = 180.0f;
+    public Vector3 rotateAxis = new Vector3(1, 0, 0);
+    
 	// Use this for initialization
 	void Start () {
 	
@@ -21,7 +23,9 @@ public class SimpleRotator : InteractiveObj {
         
         Vector3 euler = animObj.transform.localEulerAngles;
         
-        HOTween.To(animObj.transform, 1, "localEulerAngles", new Vector3(euler.x + rotateDegree, euler.y, euler.z));
+        HOTween.To(animObj.transform, 1, "localEulerAngles", new Vector3(euler.x + rotateAxis.x * rotateDegree, 
+            euler.y + rotateAxis.y * rotateDegree, 
+            euler.z + rotateAxis.z * rotateDegree));
     }
     
 }
