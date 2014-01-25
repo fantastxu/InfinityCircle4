@@ -258,12 +258,11 @@ public class HeroMotor : MonoBehaviour
 			{
 				// Horizontal / Vertical velocity
 				// bowie hacked to disconnect gamepad control
-				/*
-				Vector3 curVelocity = Input.GetAxis ("Vertical") * ForwardVec(hit)
-					+ Input.GetAxis ("Horizontal") * hero.right;
-				*/
+				
+				Vector3 curVelocity = Input.GetAxis ("Vertical") * ForwardVec(hit) + Input.GetAxis ("Horizontal") * hero.right;
+				
 
-				Vector3 curVelocity = new Vector3(0.0f, 0.0f, 0.0f);
+				//Vector3 curVelocity = new Vector3(0.0f, 0.0f, 0.0f);
 				// If not receiving speed via delegate
 				if (!getsSpeed)
 				{
