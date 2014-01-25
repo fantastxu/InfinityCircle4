@@ -177,7 +177,7 @@ public class HeroCamera : MonoBehaviour
 		
 		// Apply position and rotation
 		cam.rotation = camRot;
-		cam.position = camPos;
+		//cam.position = camPos;
 	}
 	//=================================================================================================================o
 	void ThirdPerson ()
