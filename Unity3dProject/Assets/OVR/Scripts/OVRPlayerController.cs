@@ -71,6 +71,11 @@ public class OVRPlayerController : OVRComponent
 	
 	// TEST: Get Y from second sensor
 	private float YfromSensor2            = 0.0f;
+	//bowie added
+	private float XfromSensor2			  = 0.0f;
+
+	//bowie hacked
+	public Transform cameraTrans;
 	
 	// * * * * * * * * * * * * *
 	
@@ -136,6 +141,7 @@ public class OVRPlayerController : OVRComponent
 			Quaternion q = Quaternion.identity;
 			OVRDevice.GetPredictedOrientation(1, ref q);
 			YfromSensor2 = q.eulerAngles.y;
+			XfromSensor2 = q.eulerAngles.x;
 		}
 		
 		UpdateMovement();
@@ -144,7 +150,8 @@ public class OVRPlayerController : OVRComponent
 		
 		float motorDamp = (1.0f + (Damping * DeltaTime));
 		MoveThrottle.x /= motorDamp;
-		MoveThrottle.y = (MoveThrottle.y > 0.0f) ? (MoveThrottle.y / motorDamp) : MoveThrottle.y;
+		//bowie.. MoveThrottle.y = (MoveThrottle.y > 0.0f) ? (MoveThrottle.y / motorDamp) : MoveThrottle.y;
+		MoveThrottle.y /= motorDamp;
 		MoveThrottle.z /= motorDamp;
 
 		moveDirection += MoveThrottle * DeltaTime;
@@ -155,6 +162,9 @@ public class OVRPlayerController : OVRComponent
 		else
 			FallSpeed += ((Physics.gravity.y * (GravityModifier * 0.002f)) * DeltaTime);	
 
+
+		//bowie added
+		FallSpeed = 0.0f;
 		moveDirection.y += FallSpeed * DeltaTime;
 
 		// Offset correction for uneven ground
@@ -207,24 +217,27 @@ public class OVRPlayerController : OVRComponent
 		// Move
 			
 		// WASD
-		if (Input.GetKey(KeyCode.W)) moveForward = true;
-		if (Input.GetKey(KeyCode.A)) moveLeft	 = true;
-		if (Input.GetKey(KeyCode.S)) moveBack 	 = true; 
-		if (Input.GetKey(KeyCode.D)) moveRight 	 = true; 
+		//bowie..if (Input.GetKey(KeyCode.W)) moveForward = true;
+		//bowie..if (Input.GetKey(KeyCode.A)) moveLeft	 = true;
+		//bowie..if (Input.GetKey(KeyCode.S)) moveBack 	 = true; 
+		//bowie..if (Input.GetKey(KeyCode.D)) moveRight 	 = true; 
 		// Arrow keys
-		if (Input.GetKey(KeyCode.UpArrow))    moveForward = true;
-		if (Input.GetKey(KeyCode.LeftArrow))  moveLeft 	  = true;
-		if (Input.GetKey(KeyCode.DownArrow))  moveBack 	  = true; 
-		if (Input.GetKey(KeyCode.RightArrow)) moveRight   = true; 
+		//bowie..if (Input.GetKey(KeyCode.UpArrow))    moveForward = true;
+		//bowie..if (Input.GetKey(KeyCode.LeftArrow))  moveLeft 	  = true;
+		//bowie..if (Input.GetKey(KeyCode.DownArrow))  moveBack 	  = true; 
+		//bowie..if (Input.GetKey(KeyCode.RightArrow)) moveRight   = true; 
 			
 		if ( (moveForward && moveLeft) || (moveForward && moveRight) ||
 			 (moveBack && moveLeft)    || (moveBack && moveRight) )
 			MoveScale = 0.70710678f;
 			
 		// No positional movement if we are in the air
+		//bowie hacked
+		/*
 		if (!Controller.isGrounded)	
 			MoveScale = 0.0f;
-			
+		*/
+
 		MoveScale *= DeltaTime;
 			
 		// Compute this for key movement
@@ -239,11 +252,11 @@ public class OVRPlayerController : OVRComponent
 			if (moveForward)
 				MoveThrottle += DirXform.TransformDirection(Vector3.forward * moveInfluence);
 			if (moveBack)
-				MoveThrottle += DirXform.TransformDirection(Vector3.back * moveInfluence) * BackAndSideDampen;
+				MoveThrottle += DirXform.TransformDirection(Vector3.back * moveInfluence); //bowie* BackAndSideDampen;
 			if (moveLeft)
-				MoveThrottle += DirXform.TransformDirection(Vector3.left * moveInfluence) * BackAndSideDampen;
+				MoveThrottle += DirXform.TransformDirection(Vector3.left * moveInfluence);//bowie * BackAndSideDampen;
 			if (moveRight)
-				MoveThrottle += DirXform.TransformDirection(Vector3.right * moveInfluence) * BackAndSideDampen;
+				MoveThrottle += DirXform.TransformDirection(Vector3.right * moveInfluence);//bowie * BackAndSideDampen;
 		}
 			
 		// Rotate
@@ -297,18 +310,18 @@ public class OVRPlayerController : OVRComponent
 			if(leftAxisY > 0.0f)
 	    		MoveThrottle += leftAxisY *
 				DirXform.TransformDirection(Vector3.forward * moveInfluence);
-				
+				//DirXform.TransformDirection(DirXform.forward * moveInfluence);
 			if(leftAxisY < 0.0f)
 	    		MoveThrottle += Mathf.Abs(leftAxisY) *		
-				DirXform.TransformDirection(Vector3.back * moveInfluence) * BackAndSideDampen;
-				
+					DirXform.TransformDirection(Vector3.back * moveInfluence);//bowie * BackAndSideDampen;
+				//DirXform.TransformDirection(-1.0f*DirXform.forward * moveInfluence);
 			if(leftAxisX < 0.0f)
 	    		MoveThrottle += Mathf.Abs(leftAxisX) *
-				DirXform.TransformDirection(Vector3.left * moveInfluence) * BackAndSideDampen;
+					DirXform.TransformDirection(Vector3.left * moveInfluence);//bowie * BackAndSideDampen;
 				
 			if(leftAxisX > 0.0f)
 				MoveThrottle += leftAxisX *
-				DirXform.TransformDirection(Vector3.right * moveInfluence) * BackAndSideDampen;
+					DirXform.TransformDirection(Vector3.right * moveInfluence);//bowie * BackAndSideDampen;
 
 		}
 			
@@ -336,9 +349,13 @@ public class OVRPlayerController : OVRComponent
 	{
 		if ((DirXform != null) && (CameraController != null))
 		{
+			/* bowie hacked
 			Quaternion q = Quaternion.identity;
-			q = Quaternion.Euler(0.0f, YfromSensor2, 0.0f);
-			DirXform.rotation = q * CameraController.transform.rotation;
+			q = Quaternion.Euler(0.0f, YfromSensor2, 180.0f);
+			DirXform.rotation = CameraController.transform.rotation;
+			*/
+
+			DirXform.rotation = cameraTrans.rotation;
 		}
 	}
 	
