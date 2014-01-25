@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GamePadInput\GamePad.cs">
+    <Files>
+      <File FileName="ProjectSettings\InputManager.asset" Line="887" Column="1" />
+      <File FileName="Assets\GamePadInput\GamePad.cs" Line="93" Column="54" />
+      <File FileName="Assets\GamePadInput\Demo\DemoScript.cs" Line="13" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
