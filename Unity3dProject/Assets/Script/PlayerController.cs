@@ -24,17 +24,17 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		int layer=LayerMask.NameToLayer("Interactive");
+		//int layer=LayerMask.NameToLayer("Interactive");
 		RaycastHit hit;
 		Vector3 fwd= transform.TransformDirection (Vector3.forward)* viewDiatance;
 		Debug.DrawRay(transform.position, fwd,Color.green);
 
 
-		if (Physics.Raycast (transform.position, fwd,out hit,viewDiatance,1<<layer)) 
+		if (Physics.Raycast (transform.position, fwd,out hit,viewDiatance)) 
 		{
 			
-			//if (hit.collider.tag=="Interactive")
-			//{
+			if (hit.collider.gameObject.layer==LayerMask.NameToLayer("Interactive") )
+			{
 	        	//Debug.Log(hit.collider.name);
 	        	//Debug.Log(hit.normal);
 	        	
@@ -43,14 +43,15 @@ public class PlayerController : MonoBehaviour {
 	        	//Debug.Log("hit target");
 
 	        	target=(InteractiveObj)hit.collider.gameObject.GetComponent(typeof(InteractiveObj) );
-	        	//Debug.Log(target);
-	        //}
-	        //else
-	        //{
-	        	//target=null;
-
 	        	aim.renderer.material.SetColor("_TintColor",aimColor);
-	        //}
+	        	//Debug.Log(target);
+	        }
+	        else
+	        {
+	        	target=null;
+	        	//Debug.Log("not target");
+	        	aim.renderer.material.SetColor("_TintColor",missColor);
+	        }
 	    }
 	    else
 	    {

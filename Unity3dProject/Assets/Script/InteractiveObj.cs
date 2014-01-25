@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class InteractiveObj : MonoBehaviour {
-
 	// Use this for initialization
 	void Start () {
 	
@@ -14,6 +13,6 @@ public class InteractiveObj : MonoBehaviour {
 	}
 
 	virtual public void Action(){
-		
+
 	}
 }

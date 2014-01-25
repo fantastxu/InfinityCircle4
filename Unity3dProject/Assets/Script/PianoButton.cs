@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PianoButton : InteractiveObj {
-
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -12,6 +12,7 @@ public class PianoButton : InteractiveObj {
 	void Update () {
 	
 	}
+	
 	override public void Action(){
 
 	}
