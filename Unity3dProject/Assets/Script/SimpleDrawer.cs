@@ -16,7 +16,7 @@ public class SimpleDrawer : InteractiveObj {
 	
 	}
     
-	override public void Action()
+	override public void Action(GameObject go)
     {
         GameObject animObj = GetAnimObject();
         
