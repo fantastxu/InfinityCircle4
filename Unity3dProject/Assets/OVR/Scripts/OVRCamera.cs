@@ -253,9 +253,14 @@ public class OVRCamera : OVRComponent
 		
 		// Calculate the rotation Y offset that is getting updated externally
 		// (i.e. like a controller rotation)
+		// bowie hacked for x offset
 		float yRotation = 0.0f;
+		float xRotation = 0.0f;
 		CameraController.GetYRotation(ref yRotation);
-		q = Quaternion.Euler(0.0f, yRotation, 0.0f);
+		CameraController.GetXRotation(ref xRotation);
+		//bowie q = Quaternion.Euler(0.0f, yRotation, 0.0f);
+
+		q = Quaternion.Euler(xRotation, yRotation, 0.0f);
 		dir = q * Vector3.forward;
 		q.SetLookRotation(dir, Vector3.up);
 	

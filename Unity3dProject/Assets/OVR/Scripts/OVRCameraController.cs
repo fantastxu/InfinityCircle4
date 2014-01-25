@@ -41,6 +41,9 @@ public class OVRCameraController : OVRComponent
 	private Quaternion OrientationOffset = Quaternion.identity;	
 	// Set Y rotation here; this will offset the y rotation of the cameras. 
 	private float   YRotation = 0.0f;
+
+	// bowie hacked
+	private float	XRotation = 0.0f;
 	
 	// PUBLIC MEMBERS
 	// Camera positioning:
@@ -442,7 +445,19 @@ public class OVRCameraController : OVRComponent
 	{
 		YRotation = yRotation;
 	}
-	
+
+	//bowie hacked
+	// Get/SetXRotation
+	public void GetXRotation(ref float xRotation)
+	{
+		xRotation = XRotation;
+	}
+
+	public void SetXRotation(float xRotation)
+	{
+		XRotation = xRotation;
+	}
+
 	// Get/SetTrackerRotatesY
 	public void GetTrackerRotatesY(ref bool trackerRotatesY)
 	{

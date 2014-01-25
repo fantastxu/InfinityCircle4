@@ -55,6 +55,8 @@ public class OVRPlayerController : OVRComponent
 	private Quaternion OrientationOffset = Quaternion.identity;			
 	// Rotation amount from inputs (passed down into CameraController)
 	private float 	YRotation 	 = 0.0f;
+	//bowie hacked
+	private float 	XRotation	 = 0.0f;
 	
 	// Transfom used to point player in a given direction; 
 	// We should attach objects to this if we want them to rotate 
@@ -250,10 +252,13 @@ public class OVRPlayerController : OVRComponent
 		float rotateInfluence = DeltaTime * RotationAmount * RotationScaleMultiplier;
 			
 		//reduce by half to avoid getting ill
+		//bowie hacked
+		/*
 		if (Input.GetKey(KeyCode.Q)) 
 			YRotation -= rotateInfluence * 0.5f;  
 		if (Input.GetKey(KeyCode.E)) 
 			YRotation += rotateInfluence * 0.5f; 
+		*/
 		
 		// * * * * * * * * * * *
 		// Mouse input
@@ -263,7 +268,7 @@ public class OVRPlayerController : OVRComponent
 		// Rotate
 		float deltaRotation = 0.0f;
 		if(AllowMouseRotation == false)
-			deltaRotation = Input.GetAxis("Mouse X") * rotateInfluence * 3.25f;
+			deltaRotation = 0;//..bowie hacked for disable mouse control. Input.GetAxis("Mouse X") * rotateInfluence * 3.25f;
 			
 		float filteredDeltaRotation = (sDeltaRotationOld * 0.0f) + (deltaRotation * 1.0f);
 		YRotation += filteredDeltaRotation;
@@ -276,9 +281,10 @@ public class OVRPlayerController : OVRComponent
 		moveInfluence = Acceleration * 0.1f * MoveScale * MoveScaleMultiplier;
 			
 		// Run!
+
 		moveInfluence *= 1.0f + 
 					     OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftTrigger);
-			
+
 		// Move
 		if(DirXform != null)
 		{
@@ -307,10 +313,14 @@ public class OVRPlayerController : OVRComponent
 		}
 			
 		float rightAxisX = 
-		OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.RightXAxis);
+			OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.RightXAxis);
 			
+		float rightAxisY = 
+			OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.RightYAxis);
+
 		// Rotate
-		YRotation += rightAxisX * rotateInfluence;    
+		YRotation += rightAxisX * rotateInfluence; 
+		XRotation += rightAxisY * rotateInfluence;
 		
 	// Update cameras direction and rotation
 	SetCameras();
@@ -362,6 +372,7 @@ public class OVRPlayerController : OVRComponent
 		OrientationOffset = transform.rotation;
 		// Make sure to set y rotation to 0 degrees
 		YRotation = 0.0f;
+		XRotation = 0.0f;
 	}
 	
 	// SetCameras
@@ -373,6 +384,7 @@ public class OVRPlayerController : OVRComponent
 			// to match the game player direction
 			CameraController.SetOrientationOffset(OrientationOffset);
 			CameraController.SetYRotation(YRotation);
+			CameraController.SetXRotation(XRotation);
 		}
 	}
 	

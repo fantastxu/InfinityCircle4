@@ -146,7 +146,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 1
-    axis: 2
+    axis: 19
     joyNum: 0
   - serializedVersion: 3
     m_Name: Horizontal
@@ -421,6 +421,22 @@ InputManager:
     axis: 4
     joyNum: 0
   - serializedVersion: 3
+    m_Name: R_YAxis_PS3_0
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 0
+  - serializedVersion: 3
     m_Name: R_YAxis_1
     descriptiveName: 
     descriptiveNegativeName: 
@@ -435,6 +451,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 4
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: R_YAxis_PS3_1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
     joyNum: 1
   - serializedVersion: 3
     m_Name: R_YAxis_2
@@ -453,6 +485,22 @@ InputManager:
     axis: 4
     joyNum: 2
   - serializedVersion: 3
+    m_Name: R_YAxis_PS3_2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 2
+  - serializedVersion: 3
     m_Name: R_YAxis_3
     descriptiveName: 
     descriptiveNegativeName: 
@@ -467,6 +515,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 4
+    joyNum: 3
+  - serializedVersion: 3
+    m_Name: R_YAxis_PS3_3
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
     joyNum: 3
   - serializedVersion: 3
     m_Name: R_YAxis_4
@@ -485,6 +549,22 @@ InputManager:
     axis: 4
     joyNum: 4
   - serializedVersion: 3
+    m_Name: R_YAxis_PS3_4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: R_XAxis_0
     descriptiveName: 
     descriptiveNegativeName: 
@@ -499,6 +579,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: R_XAxis_PS3_0
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
     joyNum: 0
   - serializedVersion: 3
     m_Name: R_XAxis_1
@@ -517,6 +613,22 @@ InputManager:
     axis: 3
     joyNum: 1
   - serializedVersion: 3
+    m_Name: R_XAxis_PS3_1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
+    joyNum: 1
+  - serializedVersion: 3
     m_Name: R_XAxis_2
     descriptiveName: 
     descriptiveNegativeName: 
@@ -531,6 +643,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: R_XAxis_PS3_2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: R_XAxis_3
@@ -549,6 +677,22 @@ InputManager:
     axis: 3
     joyNum: 3
   - serializedVersion: 3
+    m_Name: R_XAxis_PS3_3
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
+    joyNum: 3
+  - serializedVersion: 3
     m_Name: R_XAxis_4
     descriptiveName: 
     descriptiveNegativeName: 
@@ -563,6 +707,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: R_XAxis_PS3_4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .300000012
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
     joyNum: 4
   - serializedVersion: 3
     m_Name: DPad_XAxis_0
@@ -884,4 +1044,3 @@ InputManager:
     type: 2
     axis: 8
     joyNum: 4
-    
