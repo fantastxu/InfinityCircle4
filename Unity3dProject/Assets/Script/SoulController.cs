@@ -48,6 +48,7 @@ public class SoulController : MonoBehaviour
 
 	void Update() 
 	{
+
 		Vector3 ray = forwardTrans.TransformDirection(Vector3.forward*attachDistance);
 		Debug.DrawRay(forwardTrans.position, ray,Color.red);
 
@@ -55,8 +56,7 @@ public class SoulController : MonoBehaviour
 			return;
 
 		if(GamePad.GetButtonDown(GamePad.Button.LeftShoulder,
-		                         GamePad.Index.One) || 
-		   Input.GetKeyDown(KeyCode.Z))
+		                         GamePad.Index.One))
 		{
 			Debug.Log("Pressed leftShoulder button");
 			if(soulState == SoulState.OnObject || soulState == SoulState.OnHuman)
