@@ -39,6 +39,8 @@ public class OVRPlayerController : OVRComponent
 {
 	protected CharacterController 	Controller 		 = null;
 	protected OVRCameraController 	CameraController = null;
+	//bowie added
+	protected SoulController		soulController = null;
 
 	public float Acceleration 	   = 0.1f;
 	public float Damping 		   = 0.15f;
@@ -86,6 +88,8 @@ public class OVRPlayerController : OVRComponent
 		
 		// We use Controller to move player around
 		Controller = gameObject.GetComponent<CharacterController>();
+		//bowie added
+		soulController = gameObject.GetComponent<SoulController>();
 		
 		if(Controller == null)
 			Debug.LogWarning("OVRPlayerController: No CharacterController attached.");
@@ -299,13 +303,13 @@ public class OVRPlayerController : OVRComponent
 					     OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftTrigger);
 
 		// Move
-		if(DirXform != null)
+		if(DirXform != null && soulController.soulState == SoulState.Free)
 		{
 			float leftAxisY = 
 				OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftYAxis);
 				
 			float leftAxisX = 
-			OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftXAxis);
+				OVRGamepadController.GPC_GetAxis((int)OVRGamepadController.Axis.LeftXAxis);
 						
 			if(leftAxisY > 0.0f)
 	    		MoveThrottle += leftAxisY *
