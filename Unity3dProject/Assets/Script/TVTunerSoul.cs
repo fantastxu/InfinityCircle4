@@ -7,6 +7,7 @@ public class TVTunerSoul : AttachableObj {
     public Material secretMaterial;
     
     public MeshRenderer screenMesh;
+    public GameOver gameover;
     
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,11 @@ public class TVTunerSoul : AttachableObj {
             mats[0] = secretMaterial;
             
             screenMesh.materials = mats;
+            
+            if (gameover != null)
+            {
+                gameover.SetGameOver(2.5f, "THE END");
+            }
         }
         
         AudioSource audio = GetComponent<AudioSource>();

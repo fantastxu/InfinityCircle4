@@ -52220,9 +52220,9 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e8156b4d17d984ef2964bffb1c9c1cc4, type: 2}
-  - {fileID: 2100000, guid: d14a9e34e5ab4409d99066f749e0a378, type: 2}
-  - {fileID: 2100000, guid: 9757000ad47c1491881bbe4c68c25a3a, type: 2}
+  - {fileID: 2100000, guid: 7840ab4607d424c1eb33348310440498, type: 2}
+  - {fileID: 2100000, guid: 7d4248db567794222a9e55ac13d2e98b, type: 2}
+  - {fileID: 2100000, guid: f1c48157a08e14ff688621f522b150b6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -69248,6 +69248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secretMaterial: {fileID: 2100000, guid: 9de2c2fbee33d4d41a22a1e9a225d576, type: 2}
   screenMesh: {fileID: 999938142}
+  gameover: {fileID: 246545766}
 --- !u!82 &2086302689
 AudioSource:
   m_ObjectHideFlags: 0
