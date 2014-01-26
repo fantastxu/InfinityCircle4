@@ -256,9 +256,11 @@ public class SoulController : MonoBehaviour
 						soulState = SoulState.OnHuman;
 					else
 						soulState = SoulState.OnObject;
+
+					SetAttachEffect();
 				}
 
-				SetAttachEffect();
+
 			}
 
 
