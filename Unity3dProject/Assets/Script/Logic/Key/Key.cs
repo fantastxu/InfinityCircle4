@@ -14,8 +14,9 @@ public class Key :InteractiveObj {
 	
 	// Update is called once per frame
 	override public void Action(GameObject _actionBody){
-		this.audio.Play();
-		pc.keys[keyVal]=1;
+		//this.audio.Play();
+		//pc.keys[keyVal]=1;
+		pc.GetItem(keyVal);
 		this.gameObject.SetActive(false);
 	}
 }

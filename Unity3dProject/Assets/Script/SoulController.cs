@@ -32,10 +32,38 @@ public class SoulController : MonoBehaviour
 	float healthBarLengthVR;
 	float healthBarLengthMain;
 
+	public ParticleSystem ps;
+	
+	public Light light;
+
+
 	void Start () 
 	{
 		healthBarLengthMain = Screen.width /4;
 		healthBarLengthVR = Screen.width / 8;
+
+		AttachToPlayer();
+	}
+
+	void AttachToPlayer(){
+		GameObject targetobj = personTrans.gameObject;
+		if(targetobj != null)
+		{
+			attachableScript = targetobj.GetComponent<AttachableObj>();
+			disVec = transform.position - targetobj.transform.position;
+			if(attachableScript != null)
+				attachableScript.Active();
+
+			if(targetobj == personTrans.gameObject)
+				soulState = SoulState.OnHuman;
+			else
+				soulState = SoulState.OnObject;
+		}
+
+		SetAttachEffect();
+
+		ps.Stop();
+		light.gameObject.SetActive(false);
 	}
 
 	void OnGUI () 
@@ -218,6 +246,11 @@ public class SoulController : MonoBehaviour
 				disVec = Vector3.zero;
 				SetFreeEffect(1.0f - currentEnergy/maxEnergy);
 
+				ps.Play();
+				light.gameObject.SetActive(true);
+				
+				//Debug.Log("Onhuman");
+
 			}
 			else if(soulState == SoulState.Free || soulState == SoulState.None)
 			{
@@ -236,6 +269,12 @@ public class SoulController : MonoBehaviour
 				}
 
 				SetAttachEffect();
+
+				
+				ps.Stop();
+				light.gameObject.SetActive(false);
+
+				//Debug.Log("free mode");
 			}
 
 

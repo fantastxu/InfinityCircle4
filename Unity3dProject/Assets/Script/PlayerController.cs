@@ -20,14 +20,29 @@ public class PlayerController : MonoBehaviour {
 	public HeroAnim playerAnim;
 
 	public int[] keys;
+
+	public SimpleDoor[] doors;
+
+
+	public AudioClip getItem;
 	// Use this for initialization
 	void Start () {
 		
 	}
 	
+
+	void OpenAll(){
+		int i;
+		for (i=0;i<keys.Length;i++){
+			GetItem(i);
+		}
+	}
 	// Update is called once per frame
 	void Update () {
-
+		if(Input.GetKeyDown(KeyCode.I))
+		{
+			OpenAll();
+		}
 		//int layer=LayerMask.NameToLayer("Interactive");
 		RaycastHit[] hit;
 		Vector3 fwd= transform.TransformDirection (Vector3.forward)* viewDiatance;
@@ -98,5 +113,18 @@ public class PlayerController : MonoBehaviour {
 	    }
 
 	    cam.fieldOfView=Mathf.Lerp(startFOV,endFOV,lerpValue);
+	}
+
+	public void GetItem(int _index){
+		UnlockDoor(_index);
+		keys[_index]=1;
+
+		this.audio.PlayOneShot(getItem);
+	}
+
+	public void UnlockDoor(int _index){
+		if (doors[_index]!=null){
+			doors[_index].isLocked=false;
+		}
 	}
 }

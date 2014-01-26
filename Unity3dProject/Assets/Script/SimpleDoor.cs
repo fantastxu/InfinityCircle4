@@ -55,11 +55,11 @@ public class SimpleDoor : InteractiveObj {
         
                 if (isOpened)
                 {
-                    HOTween.To(animObj.transform, 1, "localEulerAngles", openRotation);
+                    HOTween.To(animObj.transform, 2, "localEulerAngles", openRotation);
                 }
                 else
                 {
-                    HOTween.To(animObj.transform, 1, "localEulerAngles", closeRotation);
+                    HOTween.To(animObj.transform, 2, "localEulerAngles", closeRotation);
                 }
                 
                 Sequence sequence = new Sequence(new SequenceParms().Loops(1, LoopType.Yoyo));
