@@ -2,7 +2,7 @@
 using System.Collections;
 using Holoville.HOTween;
 
-public class PIanoButton : InteractiveObj {
+public class PianoButton : InteractiveObj {
 	//private Tweener t;
 
 	public AudioClip sound;
@@ -13,6 +13,7 @@ public class PIanoButton : InteractiveObj {
 
 	public Piano pianoScript;
 
+	public Transform fptarget;
 
 	public GameObject ptObj;
 	void Awake(){
@@ -27,6 +28,7 @@ public class PIanoButton : InteractiveObj {
 
 
 	void GenerateFingerPrint(){
+		
 		if (sound!=null && fingerState==0){
 			Debug.Log("Generate fp");
 			fingerState=Random.Range(0,3);
@@ -37,29 +39,36 @@ public class PIanoButton : InteractiveObj {
 			if (fingerState!=0){
 				pianoScript.AddMaximum();
 				if (fingerState==1){
-					ptObj=(GameObject)Instantiate(pianoScript.fingerPrints[Random.Range(0,pianoScript.fingerPrints.Length)],transform.position,Quaternion.identity );
+					ptObj=(GameObject)Instantiate(pianoScript.fingerPrints[Random.Range(0,pianoScript.fingerPrints.Length)],fptarget.position,Quaternion.identity );
 					ptObj.layer=LayerMask.NameToLayer("Human");
+					ptObj.transform.parent=this.transform;
 				}
 				else if (fingerState==2){
-					ptObj=(GameObject)Instantiate(pianoScript.fingerPrints[Random.Range(0,pianoScript.fingerPrints.Length)],transform.position,Quaternion.identity );
+					ptObj=(GameObject)Instantiate(pianoScript.fingerPrints[Random.Range(0,pianoScript.fingerPrints.Length)],fptarget.position,Quaternion.identity );
 					ptObj.layer=LayerMask.NameToLayer("Ghost");
+					ptObj.transform.parent=this.transform;
 				}
 			}
+
+
 		}
-		
+	
+	
 	}
 
 
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 	
 	override public void Action(GameObject _actionBody){
 		if (sound!=null){
 			piano.audio.PlayOneShot(sound);	
 		}
+
+		pianoScript.InputVal(fingerState);
 		
 		/*
 		if (t!=null){

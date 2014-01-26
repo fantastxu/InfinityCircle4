@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 	public Camera cam;
 
 	public HeroAnim playerAnim;
+
+	public int[] keys;
 	// Use this for initialization
 	void Start () {
 		
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		//int layer=LayerMask.NameToLayer("Interactive");
 		RaycastHit hit;
 		Vector3 fwd= transform.TransformDirection (Vector3.forward)* viewDiatance;
