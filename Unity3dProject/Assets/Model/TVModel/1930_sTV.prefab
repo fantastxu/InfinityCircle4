@@ -276,7 +276,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100034
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -411,7 +411,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: -1.11541736, y: .555742979, z: -.155395627}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -500,10 +500,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1920929e-07, y: .274089873, z: -.118530303}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.48711777, y: .6598773, z: 2.69826007}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
-  m_Father: {fileID: 400038}
+  m_Father: {fileID: 400044}
 --- !u!4 &400018
 Transform:
   m_ObjectHideFlags: 1
@@ -632,7 +632,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400048}
-  - {fileID: 400016}
   m_Father: {fileID: 400046}
 --- !u!4 &400040
 Transform:
@@ -674,12 +673,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 837.799561, y: 6.75208378, z: 497.148834}
+  m_LocalRotation: {x: 0, y: -.707581639, z: 0, w: .70663166}
+  m_LocalPosition: {x: 10.2381592, y: -3.98091841, z: 8.00473022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
   - {fileID: 400000}
+  - {fileID: 400016}
   m_Father: {fileID: 0}
 --- !u!4 &400046
 Transform:
@@ -1043,8 +1043,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .5, y: .5, z: .219999999}
-  m_Center: {x: -.816963971, y: 0, z: -.573975682}
+  m_Size: {x: .31838879, y: .5, z: .220000058}
+  m_Center: {x: -.726082981, y: 0, z: -.573841929}
 --- !u!65 &6500004
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1224,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secretMaterial: {fileID: 2100000, guid: 9de2c2fbee33d4d41a22a1e9a225d576, type: 2}
   screenMesh: {fileID: 2300020}
+  gameover: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

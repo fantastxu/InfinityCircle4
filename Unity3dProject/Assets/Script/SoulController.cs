@@ -46,6 +46,9 @@ public class SoulController : MonoBehaviour
 		healthBarLengthMain = Screen.width /4;
 		healthBarLengthVR = Screen.width / 8;
 
+		if(personTrans != null)
+			Physics.IgnoreCollision(gameObject.transform.collider, personTrans.collider);
+
 		AttachToPlayer();
 	}
 
@@ -125,7 +128,9 @@ public class SoulController : MonoBehaviour
 		GUI.BeginGroup (new Rect (0,0, currentEnergy / maxEnergy * healthBarLengthMain, height));
 		
 		// Draw the foreground image
-		GUI.Box (new Rect (0,0,healthBarLengthMain,height), fgImage);
+		GUIStyle style = new GUIStyle();
+		style.stretchWidth = true;
+		GUI.Box (new Rect (0,0,healthBarLengthMain,height), fgImage, style);
 		
 		// End both Groups
 		GUI.EndGroup ();
