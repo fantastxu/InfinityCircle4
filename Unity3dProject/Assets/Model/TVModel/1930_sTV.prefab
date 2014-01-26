@@ -655,8 +655,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: 836.611511, y: 6.75208378, z: 495.236481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 837.834534, y: 6.75208473, z: 497.170288}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -1101,6 +1101,16 @@ MonoBehaviour:
   _animObject: {fileID: 100046}
   rotateDegree: 45
   rotateAxis: {x: 0, y: 0, z: 1}
+  screenMesh: {fileID: 2300020}
+  preloadedScreenMatList:
+  - {fileID: 2100000, guid: a07a28ab74c774c9eb070f5034fdada7, type: 2}
+  - {fileID: 2100000, guid: e84fd3c097c1346a28ab6018ad38fd8c, type: 2}
+  - {fileID: 2100000, guid: 356dff88b904943c3997c10909471058, type: 2}
+  - {fileID: 2100000, guid: 07cec400123a445929364a8c18d7a1ed, type: 2}
+  - {fileID: 2100000, guid: 2c496c553186b49d8a75fd00160ee609, type: 2}
+  - {fileID: 2100000, guid: 07bb22d9656da480aa2b846935c37374, type: 2}
+  - {fileID: 2100000, guid: c8705fd4dc17a4358923751b3fd3b88c, type: 2}
+  - {fileID: 2100000, guid: d6586c03a92d5418d91ba4bbc5000c6e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
