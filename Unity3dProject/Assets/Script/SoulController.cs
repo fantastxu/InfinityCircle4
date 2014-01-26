@@ -26,10 +26,85 @@ public class SoulController : MonoBehaviour
 	public GameObject rightCamera;
 	AttachableObj attachableScript = null;
 	Vector3 disVec = Vector3.zero;
+	public Texture2D bgImage; 
+	public Texture2D fgImage; 
+
+	float healthBarLengthVR;
+	float healthBarLengthMain;
 
 	void Start () 
 	{
+		healthBarLengthMain = Screen.width /4;
+		healthBarLengthVR = Screen.width / 8;
+	}
 
+	void OnGUI () 
+	{
+		int height = 12;
+
+		// Create one Group to contain both images
+		// Adjust the first 2 coordinates to place it somewhere else on-screen
+		GUI.BeginGroup (new Rect (Screen.width/2+Screen.width/16,2, healthBarLengthVR,height));
+		
+		// Draw the background image
+		GUI.Box (new Rect (0,0, healthBarLengthVR,height), bgImage);
+		
+		// Create a second Group which will be clipped
+		// We want to clip the image and not scale it, which is why we need the second Group
+		GUI.BeginGroup (new Rect (0,0, currentEnergy / maxEnergy * healthBarLengthVR, height));
+		
+		// Draw the foreground image
+		GUI.Box (new Rect (0,0,healthBarLengthVR,height), fgImage);
+		
+		// End both Groups
+		GUI.EndGroup ();
+		
+		GUI.EndGroup ();
+
+
+		// Create one Group to contain both images
+		// Adjust the first 2 coordinates to place it somewhere else on-screen
+		GUI.BeginGroup (new Rect (Screen.width/2+Screen.width/16+Screen.width/4,2, healthBarLengthVR,height));
+		
+		// Draw the background image
+		GUI.Box (new Rect (0,0, healthBarLengthVR,height), bgImage);
+		
+		// Create a second Group which will be clipped
+		// We want to clip the image and not scale it, which is why we need the second Group
+		GUI.BeginGroup (new Rect (0,0, currentEnergy / maxEnergy * healthBarLengthVR, height));
+		
+		// Draw the foreground image
+		GUI.Box (new Rect (0,0,healthBarLengthVR,height), fgImage);
+		
+		// End both Groups
+		GUI.EndGroup ();
+		
+		GUI.EndGroup ();
+
+		// Create one Group to contain both images
+		// Adjust the first 2 coordinates to place it somewhere else on-screen
+		GUI.BeginGroup (new Rect (Screen.width/8, 2, healthBarLengthMain,height));
+		
+		// Draw the background image
+		GUI.Box (new Rect (0,0, healthBarLengthMain,height), bgImage);
+		
+		// Create a second Group which will be clipped
+		// We want to clip the image and not scale it, which is why we need the second Group
+		GUI.BeginGroup (new Rect (0,0, currentEnergy / maxEnergy * healthBarLengthMain, height));
+		
+		// Draw the foreground image
+		GUI.Box (new Rect (0,0,healthBarLengthMain,height), fgImage);
+		
+		// End both Groups
+		GUI.EndGroup ();
+		
+		GUI.EndGroup ();
+	}
+	
+	public void AddjustCurrentHealth()
+	{
+
+		//healthBarLength =(Screen.width /4) * (currentEnergy / maxEnergy);
 	}
 
 	void GetCameraEffects(GameObject obj, out GrayscaleEffect grayeffect, out GlowEffect gloweffect, out MotionBlur blureffect)
@@ -191,6 +266,8 @@ public class SoulController : MonoBehaviour
 			}
 			break;
 		}
+
+		AddjustCurrentHealth();
 
 	}
 }
