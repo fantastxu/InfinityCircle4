@@ -175,13 +175,17 @@ public class SoulController : MonoBehaviour
 
 	GameObject GetAttachableObj()
 	{
-		RaycastHit hit;
+		RaycastHit[] hit;
 		Vector3 ray = forwardTrans.TransformDirection(Vector3.forward*attachDistance);
-		if(Physics.Raycast (forwardTrans.position, ray,out hit,attachDistance))
+		hit = Physics.RaycastAll(forwardTrans.position,ray,attachDistance);
 		{
-			if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Attachable"))
+			foreach(RaycastHit h in hit)
 			{
-				return hit.collider.gameObject;
+				if(h.collider.gameObject.layer == LayerMask.NameToLayer("Attachable"))
+				{
+					return h.collider.gameObject;
+				}
+
 			}
 		}
 
@@ -263,6 +267,7 @@ public class SoulController : MonoBehaviour
 			{
 				soulState = SoulState.Vanish;
 				SetVanishEffect();
+				GameOver.instance.SetGameOver(3.0f, "You Died!");
 			}
 			break;
 		}
@@ -270,4 +275,5 @@ public class SoulController : MonoBehaviour
 		AddjustCurrentHealth();
 
 	}
+	
 }
