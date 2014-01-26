@@ -28,6 +28,8 @@ public class SoulController : MonoBehaviour
 	Vector3 disVec = Vector3.zero;
 	public Texture2D bgImage; 
 	public Texture2D fgImage; 
+	public GameOver gameover;
+	public TextMesh _message;
 
 
 	float healthBarLengthVR;
@@ -132,14 +134,10 @@ public class SoulController : MonoBehaviour
 
 		if(tipmessage && (soulState != SoulState.OnHuman && soulState != SoulState.OnObject))
 		{
-			GUIStyle vrstyle =new GUIStyle();
-			vrstyle.normal.background = null;
-			float sinvalue = Mathf.Sin(Time.realtimeSinceStartup);
-			vrstyle.normal.textColor=new Color(0,0,1, sinvalue);
-			vrstyle.fontSize = 12;
-			GUI.Label(new Rect(Screen.width/2+Screen.width/16-10, Screen.height/2, Screen.width/4, 64), "Press L to attach", vrstyle);
-			GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16-10, Screen.height/2, Screen.width/4, 64), "Press L to attach", vrstyle);
+			_message.text = "Press L to attach";
 		}
+		else
+			_message.text = "";
 	}
 	
 	public void AddjustCurrentHealth()
@@ -332,7 +330,7 @@ public class SoulController : MonoBehaviour
 			{
 				soulState = SoulState.Vanish;
 				SetVanishEffect();
-				GameOver.instance.SetGameOver(3.0f, "You Died!");
+				gameover.SetGameOver(3.0f, "You Died!");
 			}
 			break;
 		}

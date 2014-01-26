@@ -7,6 +7,8 @@ public class GameOver : MonoBehaviour
 	static GameOver _instance = null;
 	string _message = null;
 	bool _keymessage = false;
+	public TextMesh message1;
+	public TextMesh message2;
 
 	public static GameOver instance
 	{
@@ -23,7 +25,7 @@ public class GameOver : MonoBehaviour
 			if(_instance == null)
 			{
 				//try to create one
-				GameObject newobj = new GameObject("GameOver");
+				GameObject newobj = (GameObject)Instantiate(Resources.Load("GameOver"));
 				_instance = (GameOver)newobj.AddComponent<GameOver>();
 				return _instance;
 			}
@@ -49,6 +51,8 @@ public class GameOver : MonoBehaviour
 	{
 		_message = null;
 		_keymessage = false;
+		message1.text = "";
+		message2.text = "";
 		StartCoroutine(_SetGameOver(waitingTime, message));
 	}
 
@@ -57,10 +61,11 @@ public class GameOver : MonoBehaviour
 		Debug.Log("Start GameOver");
 		//show gameover message to player first
 
+		message1.text = message;
 		_message = message;
 		yield return new WaitForSeconds(waitingTime);
+		message2.text = "Press L&R to restart";
 		_keymessage = true;
-
 		while(true)
 		{
 			yield return new WaitForEndOfFrame();
@@ -82,6 +87,7 @@ public class GameOver : MonoBehaviour
 
 	void OnGUI()
 	{
+
 		GUIStyle style =new GUIStyle();
 		style.normal.background = null;
 		style.normal.textColor=new Color(1,0,0);
@@ -95,16 +101,16 @@ public class GameOver : MonoBehaviour
 		if(_message != null)
 		{
 			GUI.Label(new Rect(Screen.width/8, 32, Screen.width/4, 64), _message, style);
-			GUI.Label(new Rect(Screen.width/2+Screen.width/16, 32, Screen.width/4, 64), _message, vrstyle);
-			GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16, 32, Screen.width/4, 64), _message, vrstyle);
+			//GUI.Label(new Rect(Screen.width/2+Screen.width/16, 32, Screen.width/4, 64), _message, vrstyle);
+			//GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16, 32, Screen.width/4, 64), _message, vrstyle);
 		}
 
 		if(_keymessage)
 		{
 			//wait player press keys.
 			GUI.Label(new Rect(Screen.width/8 - 60, 100, Screen.width/4, 64), "Press Space to restart", style);
-			GUI.Label(new Rect(Screen.width/2+Screen.width/16 - 30, 100, Screen.width/4, 64), "Press L&R to restart", vrstyle);
-			GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16 - 30, 100, Screen.width/4, 64), "Press L&R to restart", vrstyle);
+			//GUI.Label(new Rect(Screen.width/2+Screen.width/16 - 30, 100, Screen.width/4, 64), "Press L&R to restart", vrstyle);
+			//GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16 - 30, 100, Screen.width/4, 64), "Press L&R to restart", vrstyle);
 		}
 
 
