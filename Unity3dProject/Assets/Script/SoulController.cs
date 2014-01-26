@@ -29,8 +29,10 @@ public class SoulController : MonoBehaviour
 	public Texture2D bgImage; 
 	public Texture2D fgImage; 
 
+
 	float healthBarLengthVR;
 	float healthBarLengthMain;
+	bool tipmessage = false;
 
 	public ParticleSystem ps;
 	
@@ -127,6 +129,17 @@ public class SoulController : MonoBehaviour
 		GUI.EndGroup ();
 		
 		GUI.EndGroup ();
+
+		if(tipmessage && (soulState != SoulState.OnHuman && soulState != SoulState.OnObject))
+		{
+			GUIStyle vrstyle =new GUIStyle();
+			vrstyle.normal.background = null;
+			float sinvalue = Mathf.Sin(Time.realtimeSinceStartup);
+			vrstyle.normal.textColor=new Color(0,0,1, sinvalue);
+			vrstyle.fontSize = 12;
+			GUI.Label(new Rect(Screen.width/2+Screen.width/16-10, Screen.height/2, Screen.width/4, 64), "Press L to attach", vrstyle);
+			GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16-10, Screen.height/2, Screen.width/4, 64), "Press L to attach", vrstyle);
+		}
 	}
 	
 	public void AddjustCurrentHealth()
@@ -229,6 +242,16 @@ public class SoulController : MonoBehaviour
 		if(soulState == SoulState.Vanish)
 			return;
 
+		GameObject targetobj = GetAttachableObj();
+		if(targetobj != null)
+		{
+			tipmessage = true;
+		}
+		else
+		{
+			tipmessage = false;
+		}
+
 		if(GamePad.GetButtonDown(GamePad.Button.LeftShoulder,
 		                         GamePad.Index.One))
 		{
@@ -254,7 +277,7 @@ public class SoulController : MonoBehaviour
 			}
 			else if(soulState == SoulState.Free || soulState == SoulState.None)
 			{
-				GameObject targetobj = GetAttachableObj();
+				//GameObject targetobj = GetAttachableObj();
 				if(targetobj != null)
 				{
 					attachableScript = targetobj.GetComponent<AttachableObj>();
@@ -266,15 +289,18 @@ public class SoulController : MonoBehaviour
 						soulState = SoulState.OnHuman;
 					else
 						soulState = SoulState.OnObject;
+
+					SetAttachEffect();
 				}
 
-				SetAttachEffect();
 
 				
 				ps.Stop();
 				light.gameObject.SetActive(false);
 
 				//Debug.Log("free mode");
+
+
 			}
 
 
