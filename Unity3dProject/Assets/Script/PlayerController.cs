@@ -29,40 +29,49 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 		//int layer=LayerMask.NameToLayer("Interactive");
-		RaycastHit hit;
+		RaycastHit[] hit;
 		Vector3 fwd= transform.TransformDirection (Vector3.forward)* viewDiatance;
 		Debug.DrawRay(transform.position, fwd,Color.green);
 
 
-		if (Physics.Raycast (transform.position, fwd,out hit,viewDiatance)) 
+		hit = Physics.RaycastAll (transform.position, fwd,viewDiatance);
 		{
-			
-			if (hit.collider.gameObject.layer==LayerMask.NameToLayer("Interactive") )
+			target = null;
+			foreach(RaycastHit h in hit)
 			{
-	        	//Debug.Log(hit.collider.name);
-	        	//Debug.Log(hit.normal);
-	        	
-	        	//target=hit.collider.gameObject.transform;
-	        	//aim.renderer.material.color=Color.red;
-	        	//Debug.Log("hit target");
+				if (h.collider.gameObject.layer==LayerMask.NameToLayer("Interactive") )
+				{
+					//Debug.Log(hit.collider.name);
+					//Debug.Log(hit.normal);
+					
+					//target=hit.collider.gameObject.transform;
+					//aim.renderer.material.color=Color.red;
+					//Debug.Log("hit target");
+					
+					target=(InteractiveObj)h.collider.gameObject.GetComponent(typeof(InteractiveObj) );
+					aim.renderer.material.SetColor("_TintColor",aimColor);
+					//Debug.Log(target);
+					break;
+				}
+	
 
-	        	target=(InteractiveObj)hit.collider.gameObject.GetComponent(typeof(InteractiveObj) );
-	        	aim.renderer.material.SetColor("_TintColor",aimColor);
-	        	//Debug.Log(target);
-	        }
-	        else
-	        {
-	        	target=null;
-	        	//Debug.Log("not target");
-	        	aim.renderer.material.SetColor("_TintColor",missColor);
-	        }
+			}
+
+			if(target == null)
+			{
+				target=null;
+				//Debug.Log("not target");
+				aim.renderer.material.SetColor("_TintColor",missColor);
+			}
 	    }
-	    else
+	    /*
+		else
 	    {
 	    	//Debug.Log("miss target");
 	    	target=null;
 	    	aim.renderer.material.SetColor("_TintColor",missColor);
 	    }
+	    */
 
 	    if (target!=null){
 	    	if (Input.GetMouseButtonDown(0) ){

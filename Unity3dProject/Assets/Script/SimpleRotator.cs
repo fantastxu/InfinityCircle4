@@ -26,6 +26,12 @@ public class SimpleRotator : InteractiveObj {
         HOTween.To(animObj.transform, 1, "localEulerAngles", new Vector3(euler.x + rotateAxis.x * rotateDegree, 
             euler.y + rotateAxis.y * rotateDegree, 
             euler.z + rotateAxis.z * rotateDegree));
+        
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio != null)
+        {
+            audio.Play();
+        }
     }
     
 }

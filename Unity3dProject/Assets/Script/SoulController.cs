@@ -32,33 +32,10 @@ public class SoulController : MonoBehaviour
 	float healthBarLengthVR;
 	float healthBarLengthMain;
 
-	public ParticleSystem ps;
-
 	void Start () 
 	{
 		healthBarLengthMain = Screen.width /4;
 		healthBarLengthVR = Screen.width / 8;
-
-		AttachToHuman();
-	}
-
-
-	void AttachToHuman(){
-		GameObject targetobj=personTrans.gameObject;
-		if(targetobj != null)
-		{
-			attachableScript = targetobj.GetComponent<AttachableObj>();
-			disVec = transform.position - targetobj.transform.position;
-			if(attachableScript != null)
-				attachableScript.Active();
-
-			if(targetobj == personTrans.gameObject)
-				soulState = SoulState.OnHuman;
-			else
-				soulState = SoulState.OnObject;
-		}
-
-		SetAttachEffect();
 	}
 
 	void OnGUI () 
@@ -198,18 +175,19 @@ public class SoulController : MonoBehaviour
 
 	GameObject GetAttachableObj()
 	{
-		RaycastHit hit;
+		RaycastHit[] hit;
 		Vector3 ray = forwardTrans.TransformDirection(Vector3.forward*attachDistance);
-		if(Physics.Raycast (forwardTrans.position, ray,out hit,attachDistance))
+		hit = Physics.RaycastAll(forwardTrans.position,ray,attachDistance);
 		{
-			if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Attachable"))
+			foreach(RaycastHit h in hit)
 			{
-				//Debug.Log(hit.collider.gameObject);
-				return hit.collider.gameObject;
+				if(h.collider.gameObject.layer == LayerMask.NameToLayer("Attachable"))
+				{
+					return h.collider.gameObject;
+				}
+
 			}
 		}
-
-
 
 		return null;
 	}
@@ -243,7 +221,6 @@ public class SoulController : MonoBehaviour
 			}
 			else if(soulState == SoulState.Free || soulState == SoulState.None)
 			{
-				//Debug.Log()
 				GameObject targetobj = GetAttachableObj();
 				if(targetobj != null)
 				{
@@ -278,22 +255,19 @@ public class SoulController : MonoBehaviour
 			currentEnergy = maxEnergy;
 			if(attachableScript != null)
 				transform.position = attachableScript.gameObject.transform.position + disVec;
-				ps.Stop();
 			break;
 		case SoulState.OnObject:
 			if(attachableScript != null)
 				transform.position = attachableScript.gameObject.transform.position + disVec;
-
-				ps.Stop();
 			break;
 		case SoulState.Free:
 			currentEnergy -= consume*Time.deltaTime;
 			SetFreeEffect(1.0f - currentEnergy/maxEnergy);
-			ps.Play();
 			if(currentEnergy<=0.0f)
 			{
 				soulState = SoulState.Vanish;
 				SetVanishEffect();
+				GameOver.instance.SetGameOver(3.0f, "You Died!");
 			}
 			break;
 		}
@@ -301,4 +275,5 @@ public class SoulController : MonoBehaviour
 		AddjustCurrentHealth();
 
 	}
+	
 }
