@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip getItem;
 	// Use this for initialization
 	void Start () {
-		
+		Screen.SetResolution(2560,800,false);
 	}
 	
 
