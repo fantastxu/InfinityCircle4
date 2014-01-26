@@ -22,6 +22,8 @@ public class SoulController : MonoBehaviour
 	public Transform personTrans = null;
 	public Transform forwardTrans = null;
 	public float attachDistance = 6.0f;
+	public GameObject leftCamera;
+	public GameObject rightCamera;
 	AttachableObj attachableScript = null;
 	Vector3 disVec = Vector3.zero;
 
@@ -29,6 +31,71 @@ public class SoulController : MonoBehaviour
 	{
 
 	}
+
+	void GetCameraEffects(GameObject obj, out GrayscaleEffect grayeffect, out GlowEffect gloweffect, out MotionBlur blureffect)
+	{
+		if(obj != null)
+		{
+			grayeffect = obj.GetComponent<GrayscaleEffect>();
+			gloweffect = obj.GetComponent<GlowEffect>();
+			blureffect = obj.GetComponent<MotionBlur>();
+		}
+		else
+		{
+			grayeffect = null;
+			gloweffect = null;
+			blureffect = null;
+		}
+
+	}
+
+	void SetAttachEffect()
+	{
+		GrayscaleEffect grayEffect = null;
+		GlowEffect glowEffect = null;
+		MotionBlur blurEffect = null;
+		GetCameraEffects(leftCamera, out grayEffect, out glowEffect, out blurEffect);
+		grayEffect.enabled = false;
+		glowEffect.enabled = true;
+		blurEffect.enabled = false;
+		GetCameraEffects(rightCamera, out grayEffect, out glowEffect, out blurEffect);
+		grayEffect.enabled = false;
+		glowEffect.enabled = true;
+		blurEffect.enabled = false;
+	}
+
+	void SetFreeEffect(float energyRatio)
+	{
+		GrayscaleEffect grayEffect = null;
+		GlowEffect glowEffect = null;
+		MotionBlur blurEffect = null;
+		GetCameraEffects(leftCamera, out grayEffect, out glowEffect, out blurEffect);
+		grayEffect.enabled = false;
+		glowEffect.enabled = false;
+		blurEffect.enabled = true;
+		blurEffect.blurAmount = energyRatio;
+		GetCameraEffects(rightCamera, out grayEffect, out glowEffect, out blurEffect);
+		grayEffect.enabled = false;
+		glowEffect.enabled = false;
+		blurEffect.enabled = true;
+		blurEffect.blurAmount = energyRatio;
+	}
+
+	void SetVanishEffect()
+	{
+		GrayscaleEffect grayEffect = null;
+		GlowEffect glowEffect = null;
+		MotionBlur blurEffect = null;
+		GetCameraEffects(leftCamera, out grayEffect, out glowEffect, out blurEffect);
+		grayEffect.enabled = true;
+		glowEffect.enabled = false;
+		blurEffect.enabled = false;
+		GetCameraEffects(rightCamera, out grayEffect, out glowEffect, out blurEffect);
+		grayEffect.enabled = true;
+		glowEffect.enabled = false;
+		blurEffect.enabled = false;
+	}
+
 
 
 	GameObject GetAttachableObj()
@@ -70,6 +137,7 @@ public class SoulController : MonoBehaviour
 				attachableScript = null;
 				soulState = SoulState.Free;
 				disVec = Vector3.zero;
+				SetFreeEffect(1.0f - currentEnergy/maxEnergy);
 
 			}
 			else if(soulState == SoulState.Free || soulState == SoulState.None)
@@ -87,6 +155,8 @@ public class SoulController : MonoBehaviour
 					else
 						soulState = SoulState.OnObject;
 				}
+
+				SetAttachEffect();
 			}
 
 
@@ -113,8 +183,12 @@ public class SoulController : MonoBehaviour
 			break;
 		case SoulState.Free:
 			currentEnergy -= consume*Time.deltaTime;
+			SetFreeEffect(1.0f - currentEnergy/maxEnergy);
 			if(currentEnergy<=0.0f)
+			{
 				soulState = SoulState.Vanish;
+				SetVanishEffect();
+			}
 			break;
 		}
 
