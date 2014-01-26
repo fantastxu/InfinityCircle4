@@ -41,6 +41,7 @@ public class Piano : MonoBehaviour {
 		if (passed){
 			return;
 		}
+		
 		if (_val==0){
 			count=0;
 			//Debug.Log("miss");
