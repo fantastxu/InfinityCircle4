@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GamepadInput;
 
 public class GameOver : MonoBehaviour 
 {
@@ -68,17 +69,45 @@ public class GameOver : MonoBehaviour
 				Application.LoadLevel("Game");
 				yield break;
 			}
+
+			if(GamePad.GetButtonDown(GamePad.Button.LeftShoulder, GamePad.Index.One) &&
+			   GamePad.GetButtonDown(GamePad.Button.RightShoulder, GamePad.Index.One))
+			{
+				Application.LoadLevel("Game");
+				yield break;
+			}
 		}
 
 	}
 
 	void OnGUI()
 	{
+		GUIStyle style =new GUIStyle();
+		style.normal.background = null;
+		style.normal.textColor=new Color(1,0,0);
+		style.fontSize = 25;
+
+		GUIStyle vrstyle =new GUIStyle();
+		vrstyle.normal.background = null;
+		vrstyle.normal.textColor=new Color(1,0,0);
+		vrstyle.fontSize = 15;
+
 		if(_message != null)
-			GUI.Label(new Rect(Screen.width/8, 32, Screen.width/4, 64), _message);
+		{
+			GUI.Label(new Rect(Screen.width/8, 32, Screen.width/4, 64), _message, style);
+			GUI.Label(new Rect(Screen.width/2+Screen.width/16, 32, Screen.width/4, 64), _message, vrstyle);
+			GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16, 32, Screen.width/4, 64), _message, vrstyle);
+		}
 
 		if(_keymessage)
+		{
 			//wait player press keys.
-			GUI.Label(new Rect(Screen.width/8, 100, Screen.width/4, 64), "Press Space to restart");
+			GUI.Label(new Rect(Screen.width/8 - 60, 100, Screen.width/4, 64), "Press Space to restart", style);
+			GUI.Label(new Rect(Screen.width/2+Screen.width/16 - 30, 100, Screen.width/4, 64), "Press L&R to restart", vrstyle);
+			GUI.Label(new Rect(Screen.width/2+Screen.width/4+Screen.width/16 - 30, 100, Screen.width/4, 64), "Press L&R to restart", vrstyle);
+		}
+
+
+
 	}
 }
